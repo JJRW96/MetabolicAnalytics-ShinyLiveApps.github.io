@@ -22,15 +22,22 @@ jobs:
         with:
           r-version: '4.4.2'
 
-      - name: Install shinylive and dependencies
-        run: |
-          Rscript -e 'install.packages(c("remotes", "shiny", "plotly", "minpack.lm", "dplyr", "shinyjs"))'
-          Rscript -e 'remotes::install_github("posit-dev/r-shinylive")'
-
-      - name: Install R Dependencies
-        uses: r-lib/actions/setup-renv@v2
+      - name: Setup R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          cache-version: 1
+          packages:
+            cran::shinylive@0.3.0
+            any::knitr
+            any::rmarkdown
+            any::shiny
+            any::plotly
+            any::minpack.lm
+            any::dplyr
+            any::shinyjs
+            any::htmltools
+            any::htmlwidgets
+            any::xml2
+            any::curl
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
