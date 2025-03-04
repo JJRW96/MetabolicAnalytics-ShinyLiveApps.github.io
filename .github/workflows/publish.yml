@@ -22,6 +22,11 @@ jobs:
         with:
           r-version: '4.4.2'
 
+      - name: Install shinylive and dependencies
+        run: |
+          Rscript -e 'install.packages(c("remotes", "shiny", "plotly", "minpack.lm", "dplyr", "shinyjs"))'
+          Rscript -e 'remotes::install_github("posit-dev/r-shinylive")'
+
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
         with:
